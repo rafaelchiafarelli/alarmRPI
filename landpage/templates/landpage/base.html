@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+    <meta property="og:url"           content="https://www.programacaoparamakers.com.br/home/" />
+    <meta property="og:type"          content="Site Programação dos Alarmes" />
+    <meta property="og:title"         content="Site Programação dos Alarmes" />
+    <meta property="og:description"   content="Site para programar o PoliteAlarme" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Programação para Makers</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+	<link rel="stylesheet" href="{% static "assets/css/bootstrap.min.css" %}">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel="stylesheet" href="{% static "assets/css/ready.css" %}">
+	<link rel="stylesheet" href="{% static "assets/css/demo.css" %}">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="main-header">
+			<div class="logo-header">
+			 <h6>  </h6>
+			    <a color="black" href="/">
+    				<h6 align = 'center'  class="logo">
+    					Programação dos Alarmes
+    				</h6>
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+			<nav class="navbar navbar-header navbar-expand-lg">
+				<div class="container-fluid">
+
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item dropdown hidden-caret">
+							<a class="nav-link" href="/contact/" id="navbarDropdown1" role="button"  aria-haspopup="true" aria-expanded="false">
+								<i class="la la-envelope">
+								</i>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="sidebar">
+
+				<ul class="nav">
+
+					{% for alarm in alarms %}
+					<li class="nav-item">
+						<a href="/alarms/{{alarm.id}}">
+							<i class="la la-pencil"></i>
+							<p>Alarme {{alarm.id}}</p>								
+						</a>
+					</li>
+					{% endfor %}
+
+					
+                    <li class="nav-item">
+                        <a href="/alarms/Create">
+                            <i class="la la-edit"></i>
+                            <p>Criar novo Alarme</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/admin/">
+                            <i class="la la-ambulance"></i>
+                            <p>Administração</p>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a href="/contact/">
+                            <i class="la la-envelope"></i>
+                            <p>Contato</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/statistics/">
+                            <i class="la la-cloud"></i>
+                            <p>Estatísticas</p>
+                        </a>
+                    </li>
+				</ul>
+			</div>
+			<div class="main-panel">
+                <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col col-md-auto">
+                                {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script src="{% static "assets/js/core/jquery.3.2.1.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js" %}"></script>
+<script src="{% static "assets/js/core/popper.min.js" %}"></script>
+<script src="{% static "assets/js/core/bootstrap.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/chartist/chartist.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/jquery-mapael/jquery.mapael.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/jquery-mapael/maps/world_countries.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/chart-circle/circles.min.js" %}"></script>
+<script src="{% static "assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js" %}"></script>
+<script src="{% static "assets/js/ready.min.js" %}"></script>
+
+</html>

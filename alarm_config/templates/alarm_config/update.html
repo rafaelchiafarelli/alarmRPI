@@ -1,0 +1,45 @@
+{% extends "landpage/base.html" %}
+{% block content %}
+
+
+</div>
+  
+        <div class="col col-md-auto">
+            <div class="card">
+                <div class="card-header">
+                <p>Atualize seu Alarme!</p>
+                <p>Alarme {{form.instance.id}}</p>
+                </div>
+                <div class="card-body">
+                    <form enctype="multipart/form-data" method="post">                                                             
+                    {% csrf_token %}
+                    <ul>
+                    <p>Disparo por:
+                    {{form.blocking}}
+                    </p>
+                    <p>Contato:
+                    {{form.trigger}}
+                    </p>
+                    <p>Bloqueia?
+                    {{form.gpio_number}}                    
+                    <p>Arquivo Atual: 
+                    {% load filename %}
+                    {{form.instance | filename}}
+             
+                   
+                    <input type="file" id="id_audiofile" name="audiofile" style="display: none;" />
+                      <label for="id_audiofile" id="LblBrowse" class="btn btn-warning">
+                        Trocar!
+                         </label>
+                    </p>
+                    <p>
+                    <input type="submit" value="Atualizar!">
+                    </p>
+                    </ul>
+                    </form>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+{% endblock content %}

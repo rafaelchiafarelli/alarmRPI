@@ -1,0 +1,23 @@
+{% extends "landpage/base.html" %}
+{% block content %}
+
+
+</div>
+  
+        <div class="col col-md-auto">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                   <p>Crie um alarme!</p>
+                    <form enctype="multipart/form-data" method="post">                                                             
+                      {% csrf_token %}
+                      {{form.as_p}}
+                      <input type="submit" value="Criar!">
+                    </form>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+{% endblock content %}
