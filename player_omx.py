@@ -6,7 +6,7 @@ from audio_manager_first_try.settings import ALARM_CONFIG_PATH, MEDIA_ROOT
 import time
 
 class player_omx():
-    player = subprocess.Popen(["mplayer", "", "-ss", "30"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    player = OMXPlayer() 
     player_list = dict()
     passage_count = 0
     def play_song(self, play_this):
@@ -15,8 +15,7 @@ class player_omx():
         self.passage_count +=1
         if not self.player_list:
             print('nothing on list, so lets play something')
-            self.player.stdin.write("q")
-            self.player = subprocess.Popen(["mplayer", MEDIA_ROOT+'/'+play_this['audiofile'], "-ss", "30"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            self.player = OMXPlayer(MEDIA_ROOT+'/'+play_this['audiofile'],ars['-o','alsa'])
             self.player_list = play_this
         else:
             print('is playing somthing, so better check if we can replace it... :-)')
@@ -29,11 +28,8 @@ class player_omx():
                     if self.player_list['blocking'] == '0':
                         print('no blocking, change the file')
                         print('change file')
-                        self.player.stdin.write("q")
-                        
-                        self.player = subprocess.Popen(["mplayer", MEDIA_ROOT+'/'+play_this['audiofile'], "-ss", "30"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                        self.player_list = play_this
-                        
+                        self.player.stop()
+                        self.player = OMXPlayer(MEDIA_ROOT+'/'+play_this['audiofile'],ars['-o','alsa'])
                 else:
                     print('well, not so lucky... ')
             else:
