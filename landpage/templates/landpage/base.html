@@ -45,12 +45,17 @@
 		<div class="sidebar">
 
 				<ul class="nav">
-
+                    <li class="nav-item">
+                        <a>
+                            <i></i>
+                            <p></p>                              
+                        </a>
+                    </li>
 					{% for alarm in alarms %}
 					<li class="nav-item">
 						<a href="/alarms/{{alarm.id}}">
-							<i class="la la-pencil"></i>
-							<p>Alarme {{alarm.id}}</p>								
+							<i class="la la-pencil" href="/alarms/{{alarm.id}}"></i>
+							<p href="/alarms/{{alarm.id}}">Alarme {{alarm.id}}</p>								
 						</a>
 					</li>
 					{% endfor %}
@@ -58,27 +63,27 @@
 					
                     <li class="nav-item">
                         <a href="/alarms/Create">
-                            <i class="la la-edit"></i>
-                            <p>Criar novo Alarme</p>
+                            <i class="la la-edit" href="/alarms/Create"></i>
+                            <p href="/alarms/Create">Criar novo Alarme</p>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a href="/admin/">
-                            <i class="la la-ambulance"></i>
-                            <p>Administração</p>
+                            <i class="la la-ambulance" href="/admin/"></i>
+                            <p href="/admin/">Administração</p>
                         </a>
                     </li>
                     
                     <li class="nav-item">
                         <a href="/contact/">
-                            <i class="la la-envelope"></i>
-                            <p>Contato</p>
+                            <i class="la la-envelope" href="/contact/"></i>
+                            <p href="/contact/">Contato</p>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" href="/statistics/">
                         <a href="/statistics/">
-                            <i class="la la-cloud"></i>
+                            <i class="la la-cloud" href="/statistics/"></i>
                             <p>Estatísticas</p>
                         </a>
                     </li>
