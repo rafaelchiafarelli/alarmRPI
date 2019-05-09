@@ -1,9 +1,10 @@
 from django.urls import path
-from landpage.views import landpage,ContactInfo,home
+from .views import UpdateAlarm, CreateAlarm,Success
 
 
 urlpatterns = [
-    path('', landpage, name='landpage'),
-    path('contact/',ContactInfo, name="contact"),
-    path('home/', home, name='home')
+    path('alarms/<int:pk>', UpdateAlarm, name='update'),
+    path('alarms/Create', CreateAlarm, name='create'),
+    path('alarms/success',Success,name='success'),
+    path('alarms/fail',Success,name='fail'),
     ]
