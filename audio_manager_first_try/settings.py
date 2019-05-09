@@ -26,7 +26,7 @@ SECRET_KEY = '7r7ok822wfw7^d^-9(ylh5d)n7=pp&ybrfw0)u=0v&0pd$qn)0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["0.0.0.0","192.168.0.105"]
 
 
 # Application definition
@@ -123,16 +123,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = BASE_DIR+'/static/'
+STATIC_URL = '/staticfiles/'
+
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),
     )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
 LOGIN_REDIRECT_URL = 'landpage'
 LOGIN_URL = 'landpage'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = MEDIA_ROOT+'/'
+
+MEDIA_URL = MEDIA_ROOT+'/media/'
