@@ -43,9 +43,11 @@
 			</nav>
 		</div>
 		<div class="sidebar">
-            <nav class="sidebar-nav">
+            <div class="sidebar-header">
+                <h3>Dummy Sidebar header</h3>
+            </div>
 				<ul class="nav">
-				    <li class="nav-title">Configuração dos alarmes</li>
+				
 					{% for alarm in alarms %}
 					<li class="nav-item">
 						<a href="/alarms/{{alarm.id}}">
@@ -83,7 +85,6 @@
                         </a>
                     </li>
 				</ul>
-            </nav>
 			</div>
 			<div class="main-panel">
                 <div class="content">

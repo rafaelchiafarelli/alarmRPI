@@ -30,6 +30,10 @@ class AlarmUpdateForm(forms.ModelForm):
                 'blocking':'Bloqueia?',
                 'audiofile':'Arduivo Atual',
                 }
+        widget = {'audiofile':forms.FileInput()}
+        formfield_overrides = {
+                    Alarm.audiofile: {'widget': forms.FileInput },
+                    }
     def SaveToJson(self,this_id):
         print("will save the f....ing file!")
         d = self.cleaned_data
