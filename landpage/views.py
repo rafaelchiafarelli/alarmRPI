@@ -34,14 +34,13 @@ def get_data():
         'alarmcount':alarmcount,
         }
     return context
-
+@login_required(login_url='/login')
 def landpage(request):    
     #alarms
         #each alarm has a name "Alarm #" where, # is the number
     context = get_data()
     return render(request, 'landpage/land.html', context)
 
-@login_required()
 def home(request):
     context = {}
     return render(request, 'landpage/home.html', context)

@@ -1,0 +1,20 @@
+{% extends "landpage/base.html" %}
+{% block content %}
+
+
+<div class="card">
+    <div class="card-header">
+        <h2>Você foi desconectado!</h2>
+    </div>
+    <div class="card-body">
+        <ul>
+            <big class="btn btn-outline-info">
+                <a  href="{% url 'login' %}">Log in!</a>
+            </big>
+        </ul>
+    </div>
+     <div class="card-footer">
+     
+     </div>
+</div>
+{% endblock content %}
