@@ -15,6 +15,7 @@ def UpdateAlarm(request, pk=None):
     form = AlarmUpdateForm(request.POST or None, request.FILES or None,instance = obj)
     context = get_data()
     context = dict(context,**{'form':form})
+    context = dict(context,**{'file':obj.audiofile})
     if request.method == 'POST':
         if form.is_valid():
             form.save()

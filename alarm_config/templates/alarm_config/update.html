@@ -24,9 +24,7 @@
                     {{form.gpio_number}}                    
                     <p>Arquivo Atual: 
                     {% load filename %}
-                    {{form.instance | filename}}
-             
-                   
+                    <a href="{{file.url }}">{{form.instance | filename}}</a>
                     <input type="file" id="id_audiofile" name="audiofile" style="display: none;" />
                       <label for="id_audiofile" id="LblBrowse" class="btn btn-warning">
                         Trocar!
