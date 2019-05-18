@@ -49,7 +49,9 @@ class player_pygame():
             
             
     def stop_all(self):
-        self.player.mixer.music.stop()
+        if self.player_list:
+            self.player.mixer.music.stop()
+            self.player_list = dict()
         
         
         

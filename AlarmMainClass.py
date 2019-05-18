@@ -35,20 +35,24 @@ class MainClass():
             off_signal_count = 0
             for alarm_enum in range(0,9): ##each signal must be verified
                 current_signal = self.signals.get_input(alarm_enum)
-                if current_signal[0] == 'on': #this signal was triggered
-                    for config in current_config:
-                        #check each configured alarm
-                         if alarm_enum.__str__() == config['gpio_number']:  #if signal correspond to an alarm
-                            if current_signal[1] == 'continuous' and config['trigger'] == '1':
-                                #alarm trigered with the specified signal type, run the alarm
-                                self.player.play_song(play_this=config)
-                            if current_signal[1] == 'pulsed' and config['trigger'] == '0':
-                                #alarm trigered with the specified signal type, run the alarm
-                                self.player.play_song(play_this=config)
+                if alarm_enum == 0:
+                    #emergancy signal
+                    if current_signal[0] == 'on': #the mute signal was triggered
+                        self.player.stop_all()
                 else:
-                    off_signal_count+=1 #count the signals that are off to turn all songs off afer
+                    if current_signal[0] == 'on': #this signal was triggered
+                        for config in current_config:
+                            #check each configured alarm
+                             if alarm_enum.__str__() == config['gpio_number']:  #if signal correspond to an alarm
+                                if current_signal[1] == 'continuous' and config['trigger'] == '1':
+                                    #alarm trigered with the specified signal type, run the alarm
+                                    self.player.play_song(play_this=config)
+                                if current_signal[1] == 'pulsed' and config['trigger'] == '0':
+                                    #alarm trigered with the specified signal type, run the alarm
+                                    self.player.play_song(play_this=config)
+                    else:
+                        off_signal_count+=1 #count the signals that are off to turn all songs off afer
             if off_signal_count == 9:
-                print('all off')
                 self.player.stop_song()
                                
                                                  

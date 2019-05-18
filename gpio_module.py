@@ -3,7 +3,7 @@ import time
 from handler import handler
 
 class gpio_module():
-    available_inputs = {0:4, #configure this properly
+    available_inputs = {0:4, 
                         1:17,
                         2:27,
                         3:22,

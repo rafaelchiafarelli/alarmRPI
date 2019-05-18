@@ -40,6 +40,7 @@ if __name__ == '__main__':
         #print("will run the logic with current_config")
         #print(list_of_alarms)
         m.logic(current_config=list_of_alarms)
+        print("this is a print log")
         time.sleep(1)
         
         
