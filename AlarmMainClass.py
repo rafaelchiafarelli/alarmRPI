@@ -1,15 +1,28 @@
 from audio_manager_first_try.settings import ALARM_CONFIG_PATH, MEDIA_ROOT
-
+import time
 from player_pygame import player_pygame
 from gpio_module import gpio_module
-
+import threading
 import os
 import json
 
-class MainClass():
-    player = player_pygame()
-    signals = gpio_module()
-    signals.config()
+
+
+
+class MainClass(threading.Thread):
+
+    
+    def __init__(self, name):
+        self.player = player_pygame('player_module')
+        self.player.start()
+        
+        self.signals = gpio_module('GPIO_Module')
+        self.signals.start()
+        
+        self.die = False
+        threading.Thread.__init__(self)
+        self.name = name
+        
 
     #alarms with "blocking = 1" will have priority
     #priority between alarms with blocking = 1 is "the newer the prior" 
@@ -32,7 +45,7 @@ class MainClass():
     #current_config are a list of available configurations 
     def logic(self,current_config):
         if current_config: #it is correctly configured
-            off_signal_count = 0
+            off_signal_count = 1
             for alarm_enum in range(0,9): ##each signal must be verified
                 current_signal = self.signals.get_input(alarm_enum)
                 if alarm_enum == 0:
@@ -52,9 +65,32 @@ class MainClass():
                                     self.player.play_song(play_this=config)
                     else:
                         off_signal_count+=1 #count the signals that are off to turn all songs off afer
+                        now_playing = self.player.get_playing()
+                        for config in current_config:
+                            #check each configured alarm
+                             if alarm_enum.__str__() == config['gpio_number']:  #if signal correspond to an alarm
+                                if current_signal[1] == 'continuous' and config['trigger'] == '1' and now_playing == config:
+                                    #alarm trigered with the specified signal type, run the alarm
+                                    print("stop the song here")
+                                    self.player.stop_song()
+
+                            
             if off_signal_count == 9:
+                print("no signal detected, stop the song")
                 self.player.stop_song()
-                               
+                
+    def run (self):
+        while not self.die:
+            self.logic(self.list_and_organize())
+            print('logic')
+            time.sleep(1)
+
+    def join(self):
+        self.die = True
+        print("will stop the gpio")
+        self.signals.join()
+        super().join() 
+                                  
                                                  
 
                                 

@@ -1,8 +1,11 @@
 import RPi.GPIO as gpio
 import time
+import threading
 from handler import handler
 
-class gpio_module():
+class gpio_module(threading.Thread):
+    available_inputs = list()
+    die = False    
     available_inputs = {0:4, 
                         1:17,
                         2:27,
@@ -26,8 +29,12 @@ class gpio_module():
                      8:['off','continuous',0],
                      9:['off','continuous',0],
                     }
-    h = handler
-    
+
+    def __init__(self, name):
+        self.config()
+        threading.Thread.__init__(self)
+        self.name = name
+
     def continuous_update(self):
         #check all inputs and update the module variables
         for num  in range(len(self.available_inputs)):
@@ -62,8 +69,6 @@ class gpio_module():
     def config(self):
         gpio.cleanup()
         gpio.setmode(gpio.BCM)
-        self.h = handler(0.025,self.continuous_update)
-        self.h.start()
         for num  in range(len(self.available_inputs)):
             gpio.setup(self.available_inputs[num],
                        gpio.IN, 
@@ -74,18 +79,6 @@ class gpio_module():
            #                       bouncetime=50)
 
     
-    def callback_change(self,channel):
-        print('inside callback func, channel is')
-        print(channel)
-        print('and is it a falling or a rising edge?')
-        if gpio.input(channel) == 1:
-            print('rising')
-            
-            if self.current_state[channel] == 'off':
-                self.current_state[channel] = 'on'
-                
-        else:
-            print('falling')
     def closeup(self):
         gpio.cleanup()
         
@@ -93,12 +86,20 @@ class gpio_module():
         #return format {'signal':'3', 'type':'1'}
  #       ret = {'signal':signal.__str__(),'type':'0'}
  #       if self.current_state[signal][0] == 'on':
- #           ret = {'signal':signal.__str__(),'type':'1'}
-        
-        
+ #           ret = {'signal':signal.__str__(),'type':'1'}        
         return self.current_state[signal]
 #        return ret
-        
+
+    def run (self):
+        while not self.die:
+            self.continuous_update()
+            time.sleep(0.025)
+
+    def join(self):
+        self.die = True
+        print("will close the gpio module")
+        self.closeup()
+        super().join()
         
 
     
