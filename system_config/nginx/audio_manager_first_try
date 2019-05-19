@@ -1,0 +1,28 @@
+server {
+        listen 80;
+
+        server_name 192.168.0.100;
+	location = /favicon.ico {access_log off; log_not_found off;}
+
+        access_log  /var/log/nginx/audio_manager_first_try_access.log;
+        error_log   /var/log/nginx/audio_managet_first_try_error.log;
+
+	client_max_body_size 100M;
+
+        location /media  {
+                root /home/pi/alarmRPI/media;
+        }
+        location /static {
+		root /home/pi/alarmRPI;
+        }
+	location /staticfiles {
+		root /home/pi/alarmRPI;
+	}
+	location /profile_pics {
+		root /home/pi/alarmRPI/media;
+	}
+        location / {
+                include proxy_params;
+                proxy_pass http://unix:/home/pi/alarmRPI/alarmRPI.sock;
+        }
+}

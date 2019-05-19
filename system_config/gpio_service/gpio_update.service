@@ -1,0 +1,15 @@
+[Unit]
+Description=this is the alarmRPI GPIO driver
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/alarmRPI
+StandardOutput=file:/home/pi/alarm_runner_output.log
+StandardError=file:/home/pi/alarm_runner_error.log
+
+ExecStart=/usr/bin/python3 /home/pi/alarmRPI/alarm_runner.py 
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

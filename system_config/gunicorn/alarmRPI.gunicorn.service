@@ -1,0 +1,12 @@
+[Unit]
+Description=this is the alarmRPI gunicorn daemon
+After=network.target
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/alarmRPI
+ExecStart=/usr/bin/gunicorn3 --error-logfile /home/pi/alarmRPI/gunicorn/error.log --workers 3 --bind unix:/home/pi/alarmRPI/alarmRPI.sock audio_manager_first_try.wsgi:application
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
