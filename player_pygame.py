@@ -25,7 +25,9 @@ class player_pygame(threading.Thread):
         #stopped playing now what?
         if self.player.mixer.music.get_busy() == False: #music ended
             #remove the played song from the list
+            self.player.mixer.quit()            
             self.player_list = dict()
+            self.player.mixer.init()
        
     def play_song(self, play_this):
         if not self.player_list:

@@ -41,8 +41,9 @@ if __name__ == '__main__':
 
     try:
         while True:
-            print("main handler")
+            print("main")
             time.sleep(1)
+
     except KeyboardInterrupt:
         print('will stop the main')
         m.join()

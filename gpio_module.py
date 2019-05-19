@@ -15,7 +15,6 @@ class gpio_module(threading.Thread):
                         6:13,
                         7:26,
                         8:18,
-                        9:23,
                          }
     #checking pulsed continuous
     current_state = {0:['off','continuous',0],
@@ -27,7 +26,6 @@ class gpio_module(threading.Thread):
                      6:['off','continuous',0],
                      7:['off','continuous',0],
                      8:['off','continuous',0],
-                     9:['off','continuous',0],
                     }
 
     def __init__(self, name):
